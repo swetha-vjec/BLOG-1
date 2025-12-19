@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blog Posts</title>
+</head>
+<body>
+    <h1>Blog Posts</h1>
+    <a href="{% url 'post_new' %}">Add New Blog Post</a>
+    <ul>
+        {% for post in posts %}
+        <li>
+            {% if post.image %}
+                <img src="{{ post.image.url }}" alt="{{ post.title }}" width="100">
+            {% endif %}
+            <h2>{{ post.title }}</h2>
+            <p>Author: {{ post.author }}</p>
+            <p>Created: {{ post.created_date }} | Updated: {{ post.updated_date }}</p>
+            <a href="{% url 'post_detail' pk=post.pk %}">View</a> |
+            <a href="{% url 'post_edit' pk=post.pk %}">Edit</a> |
+            <a href="{% url 'post_delete' pk=post.pk %}">Delete</a>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
